@@ -8,8 +8,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig(({ mode }) => {
+  // Determine base path: GitHub Pages project sites need repository subpath '/get-it-write/'
+  // unless a custom domain or BASE_PATH environment variable is configured.
+  const base = process.env.BASE_PATH || (process.env.GITHUB_ACTIONS ? '/get-it-write/' : './');
+
   return {
-    base: '/',
+    base,
     plugins: [
       react(), 
       tailwindcss()
